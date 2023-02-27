@@ -1,5 +1,7 @@
 package com.javatechie.aws.cicd.example;
 
+import com.javatechie.aws.cicd.example.model.Product;
+import com.javatechie.aws.cicd.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,11 +20,17 @@ public class OrderServiceApplication {
 
     @Autowired
     private OrderDao orderDao;
+    @Autowired
+    private ProductService service;
 
     @GetMapping
     public List<Order> fetchOrders() {
         return orderDao.getOrders().stream().
                 sorted(Comparator.comparing(Order::getPrice)).collect(Collectors.toList());
+    }
+    @GetMapping("/all")
+    public List<Product> getAllTheProducts() {
+        return service.getProducts();
     }
 
     public static void main(String[] args) {
