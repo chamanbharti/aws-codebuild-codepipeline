@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,6 +33,11 @@ public class OrderServiceApplication {
     public List<Product> getAllTheProducts() {
         return service.getProducts();
     }
+    @GetMapping("/{id}")
+    public Product getProductById(@PathVariable int id) {
+        return service.getProduct(id);
+    }
+
 
     public static void main(String[] args) {
         SpringApplication.run(OrderServiceApplication.class, args);
