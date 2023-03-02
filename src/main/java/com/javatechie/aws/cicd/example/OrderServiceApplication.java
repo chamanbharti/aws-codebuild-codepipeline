@@ -31,7 +31,7 @@ public class OrderServiceApplication {
     }
     @GetMapping("/all")
     public List<Product> getAllTheProducts() {
-        return service.getProducts();
+        return service.getProducts().stream().sorted(Comparator.comparing(Product::getPrice)).collect(Collectors.toList());
     }
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable int id) {
